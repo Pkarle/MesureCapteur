@@ -1,3 +1,7 @@
+#!/usr/bin/env python
+# -- coding: utf-8 --
+
+
 # See https://docs.pycom.io for more information regarding library specifics
 
 from pysense import Pysense
