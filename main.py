@@ -1,33 +1,42 @@
+# See https://docs.pycom.io for more information regarding library specifics
+
 from pysense import Pysense
-from LIS2HH12 import LIS2HH12
+# seule la librairie pour la température est importée pour ce modèle
 from SI7006A20 import SI7006A20
-from LTR329ALS01 import LTR329ALS01
-from MPL3115A2 import MPL3115A2, ALTITUDE, PRESSURE
+
+from wifi import WiFi
+from mqtt import MQTTClient
 import time
 
+IBMorgID='xxxxxx' # Identifiant de l'instance 'IoT PLatform' sur 6 caractères
+deviceType='PyCom' # Nom du 'Device Type' défini dans le IoT Platform
+deviceID='xxxx' # ID du device (4 dernieres caractères du SSID)
+deviceToken='xxxxxxxx' # Token (mot de passe) défini pour le device dans le Iot Platform
+
+
 py = Pysense()
-mp = MPL3115A2(py, mode=ALTITUDE)
 si = SI7006A20(py)
-lt = LTR329ALS01(py)
-li = LIS2HH12(py)
+
+wifi = WiFi()
+
+
+
+#print (WiFi.connectwifi('SSID','pwd'))
+
+# Syntaxe pour envoyer un paquet MQTT à IBM Cloud
+#client = MQTTClient("d:"+IBMorgID+":"+deviceType+":"+deviceID, IBMorgID +".messaging.internetofthings.ibmcloud.com", user="use-token-auth", password=deviceToken, port=1883)
+#print(client.connect())
 
 while True:
 
-    #Display Temperature
-    print("Temperature--------------------------------")
-    print("Temperature: " + str(si.temperature()) + " deg C and Relative ")
+    print("Temperature: " + str(si.temperature())+ " deg C and Relative Humidity: " + str(si.humidity()) + " %RH")
+    print("Dew point: "+ str(si.dew_point()) + " deg C")
 
-    #Display Humidity
-    print("Humidity-----------------------------------")
-    print("Humidity: " + str(si.humidity()) + " %RH")
-
-    #Display Dew Point
-    print("Dew Point----------------------------------")
-    print("Dew point: " + str(si.dew_point()) + " deg C")
-
-    #Display T Ambient
-    print("T Ambient----------------------------------")
-    t_ambient = 24.4
-    print("Humidity Ambient for " + str(t_ambient) + " deg C is " + str(si.humid_ambient(t_ambient)) + "%RH")
-
-    time.sleep(10)
+    """
+    print("Sending")
+    mqttMsg = '{'
+    mqttMsg = mqttMsg + '"t":' + str(si.temperature())
+    mqttMsg = mqttMsg + '}'
+    client.publish(topic="iot-2/evt/data/fmt/json", msg=mqttMsg)
+    """
+    time.sleep(1)
