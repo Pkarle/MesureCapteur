@@ -13,25 +13,21 @@ li = LIS2HH12(py)
 
 while True:
 
-    print("Temperature: " + str(si.temperature()) + " deg C and Relative Humidity: " + str(si.humidity()) + " %RH")
+    #Display Temperature
+    print("Temperature--------------------------------")
+    print("Temperature: " + str(si.temperature()) + " deg C and Relative ")
+
+    #Display Humidity
+    print("Humidity-----------------------------------")
+    print("Humidity: " + str(si.humidity()) + " %RH")
+
+    #Display Dew Point
+    print("Dew Point----------------------------------")
     print("Dew point: " + str(si.dew_point()) + " deg C")
+
+    #Display T Ambient
+    print("T Ambient----------------------------------")
     t_ambient = 24.4
     print("Humidity Ambient for " + str(t_ambient) + " deg C is " + str(si.humid_ambient(t_ambient)) + "%RH")
 
-    """
-    
-    print("MPL3115A2 temperature: " + str(mp.temperature()))
-    print("Altitude: " + str(mp.altitude()))
-    mpp = MPL3115A2(py, mode=PRESSURE)
-    print("Pressure: " + str(mpp.pressure()))
-    
-    print("Light (channel Blue lux, channel Red lux): " + str(lt.light()))
-        
-    print("Acceleration: " + str(li.acceleration()))
-    print("Roll: " + str(li.roll()))
-    print("Pitch: " + str(li.pitch()))
-    
-    print("Battery voltage: " + str(py.read_battery_voltage()))
-    
-    """
     time.sleep(10)
