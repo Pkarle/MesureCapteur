@@ -33,7 +33,7 @@ wifi = WiFi()
 
 while True:
 
-    print("Temperature: " + str(si.temperature())+ " deg C and Relative Humidity: " + str(si.humidity()) + " %RH")
+    print("TTemperature: " + str(si.temperature())+ " deg C and Relative Humidity: " + str(si.humidity()) + " %RH")
     print("Dew point: "+ str(si.dew_point()) + " deg C")
 
     """
